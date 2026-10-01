@@ -7,213 +7,239 @@
   <title>Deploy or Die</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
-  <div class="app-shell">
-    <header class="topbar">
-      <div>
-        <p class="eyebrow">SRE SIMULATION</p>
-        <h1>Deploy or Die</h1>
-      </div>
-      <div class="topbar-actions">
-        <span id="status-pill" class="status-pill healthy">PRODUCTION HEALTHY</span>
-        <button id="reset-btn" class="button ghost">Reset Run</button>
-      </div>
-    </header>
+<body class="desktop-page">
+  <div class="desktop-shell">
+    <main class="desktop-workspace">
+      <button class="desktop-shortcut is-selected" type="button" data-open-game>
+        <span class="desktop-shortcut__icon">D&gt;</span>
+        <span class="desktop-shortcut__label">Deploy or Die</span>
+      </button>
 
-    <main class="layout">
-      <section class="dashboard">
-        <div class="hero-card panel">
-          <div>
-            <p class="eyebrow">MISSION</p>
-            <h2>Keep the platform alive for 8 minutes.</h2>
-            <p>Deploy changes, survive failures, automate recovery and balance reliability against infrastructure cost.</p>
+      <section id="game-window" class="desktop-window is-active">
+        <header class="desktop-window__titlebar">
+          <div class="desktop-window__title">
+            <span class="desktop-window__app-icon">D&gt;</span>
+            <span>Deploy or Die — Production Operations Console</span>
           </div>
-          <div class="timer-wrap">
-            <span class="timer-label">SHIFT</span>
-            <strong id="timer">08:00</strong>
+          <div class="desktop-window__controls" aria-label="Window controls">
+            <button class="desktop-window__control" type="button" aria-label="Minimize" data-window-action="minimize">—</button>
+            <button class="desktop-window__control" type="button" aria-label="Maximize" data-window-action="maximize">□</button>
+            <button class="desktop-window__control desktop-window__control--close" type="button" aria-label="Close" data-window-action="close">×</button>
           </div>
-        </div>
+        </header>
 
-        <div class="metrics-grid">
-          <article class="metric panel">
-            <span>Availability</span>
-            <strong id="availability">99.99%</strong>
-            <small>SLO 99.90%</small>
-          </article>
-          <article class="metric panel">
-            <span>P95 latency</span>
-            <strong id="latency">82 ms</strong>
-            <small>Target &lt; 220 ms</small>
-          </article>
-          <article class="metric panel">
-            <span>Error rate</span>
-            <strong id="errors">0.08%</strong>
-            <small>Target &lt; 1.00%</small>
-          </article>
-          <article class="metric panel">
-            <span>Monthly cost</span>
-            <strong id="cost">€186</strong>
-            <small>Budget €450</small>
-          </article>
-        </div>
-
-        <div class="panel topology-panel">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">LIVE TOPOLOGY</p>
-              <h3>Production cluster</h3>
+        <div class="desktop-window__content">
+          <div class="desktop-app-menu">
+            <div class="desktop-app-menu__items">
+              <button type="button">File</button>
+              <button type="button">View</button>
+              <button type="button">Operations</button>
+              <button type="button">Help</button>
             </div>
-            <span id="version" class="tag">v1.4.1</span>
+            <div class="desktop-app-menu__status">
+              <span id="status-pill" class="status-pill healthy">PRODUCTION HEALTHY</span>
+              <button id="reset-btn" class="button ghost">Reset Run</button>
+            </div>
           </div>
-          <div class="topology">
-            <div class="service edge">Users<span id="traffic">1.2k rpm</span></div>
-            <div class="arrow">→</div>
-            <div class="service">Load Balancer<span>healthy</span></div>
-            <div class="arrow">→</div>
-            <div id="api-service" class="service primary">API Cluster<span><b id="replicas">3</b> replicas</span></div>
-            <div class="arrow">→</div>
-            <div class="service">PostgreSQL<span id="db-state">healthy</span></div>
-          </div>
-          <div class="topology secondary-row">
-            <div class="service">Redis<span id="cache-state">healthy</span></div>
-            <div class="service">Prometheus<span>scraping</span></div>
-            <div class="service">Alertmanager<span id="alert-state">quiet</span></div>
-          </div>
-        </div>
 
-        <div class="two-column">
-          <section class="panel controls-panel">
-            <div class="section-heading">
+          <div class="app-shell">
+            <header class="topbar">
               <div>
-                <p class="eyebrow">OPERATIONS</p>
-                <h3>Production controls</h3>
+                <p class="eyebrow">SRE SIMULATION</p>
+                <h1>Deploy or Die</h1>
               </div>
-            </div>
-
-            <div class="control-grid">
-              <button class="action-card" data-action="scale-up">
-                <span>Scale API +1</span>
-                <small>+€28/mo</small>
-              </button>
-              <button class="action-card" data-action="scale-down">
-                <span>Scale API -1</span>
-                <small>Reduce cost</small>
-              </button>
-              <button class="action-card" data-action="restart">
-                <span>Restart unhealthy pods</span>
-                <small>Manual recovery</small>
-              </button>
-              <button class="action-card" data-action="rollback">
-                <span>Rollback release</span>
-                <small>Restore last stable</small>
-              </button>
-              <button class="action-card" data-action="deploy">
-                <span>Deploy v1.4.2</span>
-                <small>Risk / reward</small>
-              </button>
-              <button class="action-card" data-action="cache">
-                <span>Warm Redis cache</span>
-                <small>Lower DB pressure</small>
-              </button>
-            </div>
-          </section>
-
-          <section class="panel automation-panel">
-            <div class="section-heading">
-              <div>
-                <p class="eyebrow">AUTOMATION</p>
-                <h3>Platform upgrades</h3>
+              <div class="topbar-copy">
+                <span>ENVIRONMENT</span>
+                <strong>production-eu-1</strong>
               </div>
-              <span id="credits" class="tag">4 credits</span>
+            </header>
+
+            <div class="window-statusbar">
+              <span><i class="status-dot"></i> Connected to production cluster</span>
+              <span>GitHub Pages build</span>
+              <span>Session <strong>live</strong></span>
             </div>
 
-            <div class="upgrade-list">
-              <button class="upgrade" data-upgrade="autoscaling" data-cost="2">
-                <span>
-                  <strong>Horizontal Pod Autoscaler</strong>
-                  <small>Automatically scales during traffic spikes</small>
-                </span>
-                <em>2</em>
-              </button>
-              <button class="upgrade" data-upgrade="healthchecks" data-cost="2">
-                <span>
-                  <strong>Readiness + liveness probes</strong>
-                  <small>Automatically replaces unhealthy pods</small>
-                </span>
-                <em>2</em>
-              </button>
-              <button class="upgrade" data-upgrade="canary" data-cost="3">
-                <span>
-                  <strong>Canary deployments</strong>
-                  <small>Detect bad releases before full rollout</small>
-                </span>
-                <em>3</em>
-              </button>
-              <button class="upgrade" data-upgrade="dbpool" data-cost="2">
-                <span>
-                  <strong>Connection pooling</strong>
-                  <small>Protect PostgreSQL under peak traffic</small>
-                </span>
-                <em>2</em>
-              </button>
-            </div>
-          </section>
+            <main class="layout">
+              <section class="dashboard">
+                <div class="hero-card panel">
+                  <div>
+                    <p class="eyebrow">MISSION</p>
+                    <h2>Keep the platform alive for 8 minutes.</h2>
+                    <p>Deploy changes, survive failures, automate recovery and balance reliability against infrastructure cost.</p>
+                  </div>
+                  <div class="timer-wrap">
+                    <span class="timer-label">SHIFT</span>
+                    <strong id="timer">08:00</strong>
+                  </div>
+                </div>
+
+                <div class="metrics-grid">
+                  <article class="metric panel">
+                    <span>Availability</span>
+                    <strong id="availability">99.99%</strong>
+                    <small>SLO 99.90%</small>
+                  </article>
+                  <article class="metric panel">
+                    <span>P95 latency</span>
+                    <strong id="latency">82 ms</strong>
+                    <small>Target &lt; 220 ms</small>
+                  </article>
+                  <article class="metric panel">
+                    <span>Error rate</span>
+                    <strong id="errors">0.08%</strong>
+                    <small>Target &lt; 1.00%</small>
+                  </article>
+                  <article class="metric panel">
+                    <span>Monthly cost</span>
+                    <strong id="cost">€186</strong>
+                    <small>Budget €450</small>
+                  </article>
+                </div>
+
+                <div class="panel topology-panel">
+                  <div class="section-heading">
+                    <div>
+                      <p class="eyebrow">LIVE TOPOLOGY</p>
+                      <h3>Production cluster</h3>
+                    </div>
+                    <span id="version" class="tag">v1.4.1</span>
+                  </div>
+                  <div class="topology">
+                    <div class="service edge">Users<span id="traffic">1.2k rpm</span></div>
+                    <div class="arrow">→</div>
+                    <div class="service">Load Balancer<span>healthy</span></div>
+                    <div class="arrow">→</div>
+                    <div id="api-service" class="service primary">API Cluster<span><b id="replicas">3</b> replicas</span></div>
+                    <div class="arrow">→</div>
+                    <div class="service">PostgreSQL<span id="db-state">healthy</span></div>
+                  </div>
+                  <div class="topology secondary-row">
+                    <div class="service">Redis<span id="cache-state">healthy</span></div>
+                    <div class="service">Prometheus<span>scraping</span></div>
+                    <div class="service">Alertmanager<span id="alert-state">quiet</span></div>
+                  </div>
+                </div>
+
+                <div class="two-column">
+                  <section class="panel controls-panel">
+                    <div class="section-heading">
+                      <div>
+                        <p class="eyebrow">OPERATIONS</p>
+                        <h3>Production controls</h3>
+                      </div>
+                    </div>
+                    <div class="control-grid">
+                      <button class="action-card" data-action="scale-up"><span>Scale API +1</span><small>+€28/mo</small></button>
+                      <button class="action-card" data-action="scale-down"><span>Scale API -1</span><small>Reduce cost</small></button>
+                      <button class="action-card" data-action="restart"><span>Restart unhealthy pods</span><small>Manual recovery</small></button>
+                      <button class="action-card" data-action="rollback"><span>Rollback release</span><small>Restore last stable</small></button>
+                      <button class="action-card" data-action="deploy"><span>Deploy v1.4.2</span><small>Risk / reward</small></button>
+                      <button class="action-card" data-action="cache"><span>Warm Redis cache</span><small>Lower DB pressure</small></button>
+                    </div>
+                  </section>
+
+                  <section class="panel automation-panel">
+                    <div class="section-heading">
+                      <div>
+                        <p class="eyebrow">AUTOMATION</p>
+                        <h3>Platform upgrades</h3>
+                      </div>
+                      <span id="credits" class="tag">4 credits</span>
+                    </div>
+                    <div class="upgrade-list">
+                      <button class="upgrade" data-upgrade="autoscaling" data-cost="2"><span><strong>Horizontal Pod Autoscaler</strong><small>Automatically scales during traffic spikes</small></span><em>2</em></button>
+                      <button class="upgrade" data-upgrade="healthchecks" data-cost="2"><span><strong>Readiness + liveness probes</strong><small>Automatically replaces unhealthy pods</small></span><em>2</em></button>
+                      <button class="upgrade" data-upgrade="canary" data-cost="3"><span><strong>Canary deployments</strong><small>Detect bad releases before full rollout</small></span><em>3</em></button>
+                      <button class="upgrade" data-upgrade="dbpool" data-cost="2"><span><strong>Connection pooling</strong><small>Protect PostgreSQL under peak traffic</small></span><em>2</em></button>
+                    </div>
+                  </section>
+                </div>
+              </section>
+
+              <aside class="sidebar">
+                <section class="panel score-panel">
+                  <p class="eyebrow">SRE SCORE</p>
+                  <div class="score-ring"><strong id="score">82</strong><span>/100</span></div>
+                  <div class="score-bars">
+                    <div><span>Reliability</span><progress id="score-reliability" max="100" value="90"></progress></div>
+                    <div><span>Automation</span><progress id="score-automation" max="100" value="25"></progress></div>
+                    <div><span>Performance</span><progress id="score-performance" max="100" value="86"></progress></div>
+                    <div><span>Efficiency</span><progress id="score-efficiency" max="100" value="92"></progress></div>
+                  </div>
+                </section>
+
+                <section class="panel incident-panel">
+                  <div class="section-heading">
+                    <div><p class="eyebrow">INCIDENT FEED</p><h3>Events</h3></div>
+                    <span id="incident-count" class="tag danger">0 active</span>
+                  </div>
+                  <div id="incident-feed" class="incident-feed"></div>
+                </section>
+
+                <section class="panel pipeline-panel">
+                  <p class="eyebrow">CI/CD</p>
+                  <h3>Release pipeline</h3>
+                  <div class="pipeline">
+                    <span class="done">Lint</span>
+                    <span class="done">Test</span>
+                    <span class="done">Build</span>
+                    <span class="done">Scan</span>
+                    <span id="pipeline-deploy">Deploy</span>
+                  </div>
+                </section>
+              </aside>
+            </main>
+          </div>
         </div>
       </section>
-
-      <aside class="sidebar">
-        <section class="panel score-panel">
-          <p class="eyebrow">SRE SCORE</p>
-          <div class="score-ring"><strong id="score">82</strong><span>/100</span></div>
-          <div class="score-bars">
-            <div><span>Reliability</span><progress id="score-reliability" max="100" value="90"></progress></div>
-            <div><span>Automation</span><progress id="score-automation" max="100" value="25"></progress></div>
-            <div><span>Performance</span><progress id="score-performance" max="100" value="86"></progress></div>
-            <div><span>Efficiency</span><progress id="score-efficiency" max="100" value="92"></progress></div>
-          </div>
-        </section>
-
-        <section class="panel incident-panel">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">INCIDENT FEED</p>
-              <h3>Events</h3>
-            </div>
-            <span id="incident-count" class="tag danger">0 active</span>
-          </div>
-          <div id="incident-feed" class="incident-feed"></div>
-        </section>
-
-        <section class="panel pipeline-panel">
-          <p class="eyebrow">CI/CD</p>
-          <h3>Release pipeline</h3>
-          <div class="pipeline">
-            <span class="done">Lint</span>
-            <span class="done">Test</span>
-            <span class="done">Build</span>
-            <span class="done">Scan</span>
-            <span id="pipeline-deploy">Deploy</span>
-          </div>
-        </section>
-      </aside>
     </main>
+
+    <div id="start-menu" class="start-menu" hidden>
+      <div class="start-menu__header">
+        <span class="start-menu__avatar">S</span>
+        <div><strong>Samael</strong><span>DevOps portfolio</span></div>
+      </div>
+      <div class="start-menu__programs">
+        <button type="button" class="start-menu__program" data-open-game>
+          <span class="start-menu__program-icon">D&gt;</span>
+          <span><strong>Deploy or Die</strong><small>Production operations simulator</small></span>
+        </button>
+        <a class="start-menu__program" href="https://github.com/bleonheart/Deploy-Or-Die" target="_blank" rel="noopener noreferrer">
+          <span class="start-menu__program-icon">GH</span>
+          <span><strong>GitHub Repository</strong><small>Source, workflow and project files</small></span>
+        </a>
+      </div>
+      <div class="start-menu__footer"><button type="button" id="start-reset">Restart simulation</button></div>
+    </div>
+
+    <nav class="desktop-taskbar" aria-label="Taskbar">
+      <button id="start-button" class="start-button" type="button" aria-expanded="false"><span class="start-button__mark"></span><span>Start</span></button>
+      <div class="taskbar-divider"></div>
+      <div class="taskbar-apps">
+        <button id="taskbar-game" class="taskbar-app is-active" type="button"><span class="taskbar-app__icon">D&gt;</span><span>Deploy or Die</span></button>
+      </div>
+      <div class="system-tray"><span class="tray-status" title="Production connected">●</span><time id="desktop-clock" class="desktop-clock">--:--</time></div>
+    </nav>
   </div>
 
   <div id="toast" class="toast" aria-live="polite"></div>
   <div id="result-modal" class="modal hidden">
-    <div class="modal-card">
-      <p class="eyebrow">SHIFT COMPLETE</p>
-      <h2 id="result-title">Production survived.</h2>
-      <p id="result-copy"></p>
-      <div class="result-stats">
-        <div><span>Score</span><strong id="result-score">0</strong></div>
-        <div><span>Availability</span><strong id="result-availability">0%</strong></div>
-        <div><span>Incidents resolved</span><strong id="result-incidents">0</strong></div>
+    <div class="modal-card desktop-dialog">
+      <div class="desktop-dialog__titlebar"><span>Deploy or Die</span><span>×</span></div>
+      <div class="desktop-dialog__body">
+        <p class="eyebrow">SHIFT COMPLETE</p>
+        <h2 id="result-title">Production survived.</h2>
+        <p id="result-copy"></p>
+        <div class="result-stats">
+          <div><span>Score</span><strong id="result-score">0</strong></div>
+          <div><span>Availability</span><strong id="result-availability">0%</strong></div>
+          <div><span>Incidents resolved</span><strong id="result-incidents">0</strong></div>
+        </div>
+        <button id="play-again" class="button primary">Run another shift</button>
       </div>
-      <button id="play-again" class="button primary">Run another shift</button>
     </div>
   </div>
-
   <script src="assets/app.js"></script>
 </body>
 </html>
