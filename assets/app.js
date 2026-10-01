@@ -364,3 +364,79 @@ $('#play-again').addEventListener('click', resetGame)
 
 render()
 timerHandle = setInterval(tick, 1000)
+
+
+const gameWindow = $('#game-window')
+const taskbarGame = $('#taskbar-game')
+const startButton = $('#start-button')
+const startMenu = $('#start-menu')
+
+function setWindowVisible(visible) {
+  gameWindow.classList.toggle('is-minimized', !visible)
+  gameWindow.classList.remove('is-closed')
+  taskbarGame.classList.toggle('is-active', visible)
+  taskbarGame.classList.toggle('is-minimized', !visible)
+}
+
+function openGameWindow() {
+  setWindowVisible(true)
+  startMenu.hidden = true
+  startButton.setAttribute('aria-expanded', 'false')
+}
+
+$$('[data-open-game]').forEach((button) => button.addEventListener('click', openGameWindow))
+
+$$('[data-window-action]').forEach((button) => {
+  button.addEventListener('click', () => {
+    const action = button.dataset.windowAction
+
+    if (action === 'minimize') {
+      setWindowVisible(false)
+      return
+    }
+
+    if (action === 'maximize') {
+      gameWindow.classList.toggle('is-maximized')
+      return
+    }
+
+    if (action === 'close') {
+      gameWindow.classList.add('is-closed')
+      taskbarGame.classList.remove('is-active')
+      taskbarGame.classList.add('is-minimized')
+    }
+  })
+})
+
+taskbarGame.addEventListener('click', () => {
+  const hidden = gameWindow.classList.contains('is-minimized') || gameWindow.classList.contains('is-closed')
+  if (hidden) openGameWindow()
+  else setWindowVisible(false)
+})
+
+startButton.addEventListener('click', () => {
+  startMenu.hidden = !startMenu.hidden
+  startButton.setAttribute('aria-expanded', String(!startMenu.hidden))
+})
+
+$('#start-reset').addEventListener('click', () => {
+  resetGame()
+  openGameWindow()
+})
+
+document.addEventListener('click', (event) => {
+  if (startMenu.hidden) return
+  if (startMenu.contains(event.target) || startButton.contains(event.target)) return
+  startMenu.hidden = true
+  startButton.setAttribute('aria-expanded', 'false')
+})
+
+function updateDesktopClock() {
+  $('#desktop-clock').textContent = new Intl.DateTimeFormat([], {
+    hour: '2-digit',
+    minute: '2-digit'
+  }).format(new Date())
+}
+
+updateDesktopClock()
+setInterval(updateDesktopClock, 15000)
