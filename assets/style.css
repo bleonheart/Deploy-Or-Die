@@ -1348,3 +1348,175 @@ progress::-moz-progress-bar {
     width: min(318px, calc(100vw - 8px));
   }
 }
+
+
+body {
+  min-height: 100vh;
+  padding: 18px;
+  overflow: auto;
+  font-family: var(--desktop-font);
+  font-size: 15px;
+  color: var(--desktop-text);
+  background:
+    radial-gradient(circle at 14% 82%, rgba(152, 112, 68, .16), transparent 31%),
+    radial-gradient(circle at 72% 18%, rgba(241, 216, 154, .045), transparent 30%),
+    linear-gradient(140deg, #1b211c 0, #181e19 42%, #101511 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .42;
+  background-image:
+    linear-gradient(90deg, transparent 0 31px, rgba(246, 223, 164, .018) 32px),
+    linear-gradient(transparent 0 31px, rgba(246, 223, 164, .014) 32px);
+  background-size: 32px 32px;
+}
+
+.program-window {
+  width: min(1600px, 100%);
+  min-height: calc(100vh - 36px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: 31px 32px minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid #090d0a;
+  background: var(--desktop-panel);
+  box-shadow:
+    0 0 0 1px #55594c,
+    0 14px 40px rgba(0, 0, 0, .72);
+}
+
+.program-window__titlebar {
+  display: flex;
+  min-width: 0;
+  height: 31px;
+  padding-left: 7px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #0d120e;
+  background: linear-gradient(#2b322b, #1d241e);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .08);
+}
+
+.program-window__title {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 7px;
+  color: #e4e8e1;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.program-window__title > span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.program-window__icon {
+  display: grid;
+  width: 19px;
+  height: 19px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid #111713;
+  background: var(--desktop-cream);
+  color: #5c402c;
+  font: 800 9px/1 Consolas, monospace;
+}
+
+.program-window__controls {
+  align-self: stretch;
+  display: flex;
+}
+
+.program-window__controls span {
+  display: grid;
+  width: 31px;
+  height: 100%;
+  place-items: center;
+  border-left: 1px solid #151a16;
+  background: linear-gradient(#444c43, #2c332d);
+  color: #dfe3dc;
+  line-height: 1;
+}
+
+.program-window__controls .close {
+  background: linear-gradient(#4c433d, #332923);
+}
+
+.program-window__menubar {
+  display: flex;
+  height: 32px;
+  padding: 0 6px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px solid #161b17;
+  background: #303831;
+}
+
+.program-window__menus,
+.program-window__status {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.program-window__menus span {
+  height: 24px;
+  padding: 3px 8px 0;
+  color: #ced4cb;
+  font-size: 14px;
+}
+
+.program-window > .app-shell {
+  min-height: 0;
+}
+
+@media (max-width: 860px) {
+  body {
+    padding: 8px;
+  }
+
+  .program-window {
+    min-height: calc(100vh - 16px);
+  }
+}
+
+@media (max-width: 580px) {
+  body {
+    padding: 0;
+  }
+
+  .program-window {
+    min-height: 100vh;
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .program-window__titlebar {
+    height: 36px;
+  }
+
+  .program-window {
+    grid-template-rows: 36px 32px minmax(0, 1fr);
+  }
+
+  .program-window__controls span {
+    width: 36px;
+  }
+
+  .program-window__menus {
+    display: none;
+  }
+
+  .program-window__menubar {
+    justify-content: flex-end;
+  }
+}
