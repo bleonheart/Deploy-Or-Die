@@ -1,37 +1,136 @@
-# Deploy or Die
+<p align="center">
+ <strong>Deploy or Die — DevOps & SRE Incident Simulation</strong><br/>
+ A browser-based strategy game built around production operations, incident response, reliability, automation, and deployment engineering.<br/>
+ Keep the platform alive while traffic grows, services fail, releases break, and infrastructure costs climb.
+</p>
 
-Deploy or Die is a browser-based DevOps strategy game where the player operates a live production platform under changing traffic, failing containers, database pressure and risky releases.
+<p align="center">
+ <a href="https://github.com/bleonheart/Deploy-Or-Die/stargazers">
+  <img src="https://img.shields.io/github/stars/bleonheart/Deploy-Or-Die?style=social" alt="GitHub Stars" />
+ </a>
+ <a href="https://github.com/bleonheart/Deploy-Or-Die/actions/workflows/pages.yml">
+  <img src="https://github.com/bleonheart/Deploy-Or-Die/actions/workflows/pages.yml/badge.svg" alt="GitHub Pages" />
+ </a>
+ <a href="https://bleonheart.github.io/Deploy-Or-Die/">
+  <img src="https://img.shields.io/badge/Play-GitHub%20Pages-blue?logo=github" alt="Play on GitHub Pages" />
+ </a>
+</p>
 
-The project is deliberately static so the portfolio demo itself can be hosted for free on GitHub Pages while still demonstrating DevOps concepts through gameplay and repository automation.
+---
 
+## Overview
 
-## Run locally
+Deploy or Die turns DevOps and SRE concepts into an interactive production-operations game.
 
-Open `index.html` directly, or serve the folder with any static web server.
+The player is responsible for a live platform while traffic changes, deployments introduce risk, containers fail, databases come under pressure, and operating costs increase. The goal is not simply to keep the service online, but to improve the platform until common incidents can be detected, mitigated, and recovered from automatically.
 
-Python example:
+The project is intentionally implemented as a lightweight browser application so the playable portfolio demo can be hosted directly on GitHub Pages while the repository demonstrates automated deployment through GitHub Actions.
+
+## Gameplay
+
+The simulation focuses on operational tradeoffs rather than traditional combat or progression.
+
+Players manage areas such as:
+
+- Service replicas and available capacity
+- Production traffic and request latency
+- Deployment health and rollback decisions
+- Database pressure and connection limits
+- Incident detection and recovery
+- Infrastructure cost
+- Reliability and availability
+- Automation upgrades
+- CI/CD maturity
+
+Incidents can include:
+
+- Sudden traffic spikes
+- Container failures
+- Risky deployments
+- Database saturation
+- Increased latency
+- Capacity shortages
+
+As the simulation progresses, manual responses can be replaced with automated operational controls.
+
+## DevOps Concepts
+
+The project is designed as a portfolio demonstration of engineering concepts including:
+
+- CI/CD workflows
+- GitHub Actions
+- GitHub Pages deployments
+- Release and rollback strategies
+- Horizontal scaling
+- Health checks
+- Autoscaling
+- Incident response
+- Reliability engineering
+- Observability concepts
+- Capacity planning
+- Cost management
+- Canary deployment concepts
+- Infrastructure automation
+
+The current version simulates infrastructure behavior in the browser. The architecture is intentionally extensible toward real services, telemetry, Kubernetes, Terraform, Prometheus, Grafana, and OpenTelemetry.
+
+## Quick Start
+
+Clone the repository:
+
+```bash
+git clone https://github.com/bleonheart/Deploy-Or-Die.git
+cd Deploy-Or-Die
+```
+
+Open `index.html` directly in a browser, or start a local static server:
 
 ```bash
 python -m http.server 8080
 ```
 
-Then open `http://localhost:8080`.
+Then open:
 
-## Deploy to GitHub Pages
+```text
+http://localhost:8080
+```
 
-1. Create a new GitHub repository.
-2. Upload all files from this project to the repository root.
-3. Use `main` as the default branch.
-4. Open `Settings > Pages`.
-5. Under `Build and deployment`, set `Source` to `GitHub Actions`.
-6. Push to `main` or manually run the `Deploy GitHub Pages` workflow.
-7. The deployment URL will appear in the workflow run and in the repository Pages settings.
+## Live Demo
 
-The workflow is located at `.github/workflows/pages.yml`.
+The GitHub Pages deployment is available at:
 
-## Suggested portfolio description
+https://bleonheart.github.io/Deploy-Or-Die/
 
-Deploy or Die is an interactive SRE and DevOps simulation that turns operational engineering into gameplay. Players manage a production service, react to incidents, scale capacity, perform rollbacks and invest in automation such as health probes, autoscaling, connection pooling and canary deployments. The project is deployed through GitHub Actions to GitHub Pages.
+Every push to `main` triggers the Pages workflow.
+
+## Deployment
+
+GitHub Pages is deployed through:
+
+```text
+.github/workflows/pages.yml
+```
+
+The workflow uses two jobs:
+
+```text
+Push to main
+     |
+     v
+   Build
+     |
+     +-- Checkout repository
+     +-- Configure GitHub Pages
+     +-- Upload github-pages artifact
+     |
+     v
+  Deploy
+     |
+     +-- Download deployment artifact
+     +-- Publish to GitHub Pages
+```
+
+The deployment job depends on the build job so the Pages artifact is fully available before deployment begins.
 
 ## Architecture
 
@@ -45,23 +144,56 @@ Browser
   |     +-- Cost model
   |
   +-- Operations Dashboard
-        +-- Metrics
-        +-- Topology
+        +-- Service metrics
+        +-- Infrastructure topology
         +-- Incident feed
-        +-- CI/CD panel
+        +-- CI/CD controls
         +-- Automation upgrades
 ```
 
-## Expansion ideas
+The application is currently fully static and requires no backend services.
 
-- Replace simulated telemetry with a real API and Prometheus metrics
-- Add a Go backend
-- Add Docker and Kubernetes manifests
-- Add Terraform for cloud infrastructure
-- Add OpenTelemetry traces
-- Add Grafana dashboards
-- Add k6 load tests
-- Add Argo CD or Flux for GitOps
-- Add real canary analysis
-- Add postmortem generation after each run
-- Add multiple regions and failover scenarios
+## Project Structure
+
+```text
+Deploy-Or-Die/
+├── .github/
+│   └── workflows/
+│       └── pages.yml
+├── assets/
+│   ├── app.js
+│   └── style.css
+├── index.html
+└── README.md
+```
+
+## Roadmap
+
+Planned extensions include:
+
+- Go service backend
+- Docker containerization
+- Kubernetes deployment manifests
+- Terraform infrastructure
+- Prometheus metrics
+- Grafana dashboards
+- OpenTelemetry traces
+- k6 load testing
+- Argo CD or Flux GitOps
+- Real canary analysis
+- Multi-region failover scenarios
+- Automated incident postmortems
+- Persistent player progression
+- More advanced chaos-engineering events
+
+## Contributing
+
+Contributions and experiments are welcome.
+
+1. Fork the repository
+2. Create a feature branch
+3. Make and test the changes
+4. Keep changes focused and compatible with the existing simulation
+5. Open a pull request with a clear description
+
+---
